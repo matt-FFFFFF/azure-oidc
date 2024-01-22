@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     env:
-      ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
       ARM_USE_OIDC: true
       TF_IN_AUTOMATION: 1
     steps:
@@ -24,11 +24,11 @@ jobs:
       - name: Terraform Init
         run: |
           terraform init \
-            -backend-config="container_name=${{ env.BACKEND_STORAGE_CONTAINER }}" \
-            -backend-config="key=${{ env.BACKEND_KEY }}" \
-            -backend-config="resource_group_name=${{ env.BACKEND_RESOURCE_GROUP }}" \
+            -backend-config="container_name=${{ vars.BACKEND_STORAGE_CONTAINER }}" \
+            -backend-config="key=${{ vars.BACKEND_KEY }}" \
+            -backend-config="resource_group_name=${{ vars.BACKEND_RESOURCE_GROUP }}" \
             -backend-config="snapshot=true" \
-            -backend-config="storage_account_name=${{ env.BACKEND_STORAGE_ACCOUNT }}"
+            -backend-config="storage_account_name=${{ vars.BACKEND_STORAGE_ACCOUNT }}"
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
