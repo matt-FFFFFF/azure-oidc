@@ -9,6 +9,7 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: prod
     env:
       ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
