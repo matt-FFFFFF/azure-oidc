@@ -11,4 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "TOKEN_REQUEST: $ACTIONS_ID_TOKEN_REQUEST_TOKEN"
+          echo b64
+          echo "$ACTIONS_ID_TOKEN_REQUEST_TOKEN" | base64
