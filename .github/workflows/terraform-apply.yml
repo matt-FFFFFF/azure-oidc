@@ -6,25 +6,25 @@ on:
       - main
   workflow_dispatch:
 
-# id-token is required to use OIDC auth
 permissions:
   contents: read
-  id-token: write
+  id-token: write    # Necessary to use OIDC auth
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: prod
     env:
-      ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
-      ARM_SNAPSHOT: true
-      ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
-      ARM_USE_AZUREAD: true
-      ARM_USE_OIDC: true
-      TF_IN_AUTOMATION: 1
+      ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}              # Client id of the user-assigned identity
+      ARM_SNAPSHOT: true                                    # Snapshot the state file in blob storage
+      ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}  # Subscription id that we are using for both provider and backend
+      ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}              # Tenant id that we are using for both provider and backend
+      ARM_USE_AZUREAD: true                                 # Use Azure AD for authentication to the backend (rather than try and get the access key)
+      ARM_USE_OIDC: true                                    # Use OIDC for authentication for the provider and the backend
+      TF_IN_AUTOMATION: 1                                   # https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform#controlling-terraform-output-in-automation
     steps:
       - uses: actions/checkout@v4
+
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.7.0
@@ -38,4 +38,4 @@ jobs:
             -backend-config="storage_account_name=${{ vars.BACKEND_STORAGE_ACCOUNT }}"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve # YOLO ;-)
