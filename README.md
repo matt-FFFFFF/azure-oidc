@@ -42,10 +42,24 @@ The AzureRM provider must be configured with the following options:
 An example of the provider block is shown below:
 
 ```terraform
-# Configure the Microsoft Azure Provider to use OIDC
 provider "azurerm" {
   use_oidc = true
   features {}
+}
+```
+
+## AzAPI Provider
+
+The AzAPI provider must be configured with the following options:
+
+- `provider "azapi" {}` block
+- Environment variables
+
+> Many `ARM_*` environment variables are shared between the AzureRM and AzAPI providers. E.g. ARM_CLIENT_ID, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID, ARM_USE_OIDC, etc.
+
+```terraform
+provider "azurerm" {
+  use_oidc = true
 }
 ```
 
