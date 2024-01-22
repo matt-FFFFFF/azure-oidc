@@ -1,0 +1,14 @@
+---
+name: token blurbs
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+
+jobs:
+  token:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "TOKEN_REQUEST: $ACTIONS_ID_TOKEN_REQUEST_TOKEN"
