@@ -1,0 +1,31 @@
+---
+name: terraform apply
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="container_name=${{ env.BACKEND_STORAGE_CONTAINER }}" \
+            -backend-config="key=${{ env.BACKEND_KEY }}" \
+            -backend-config="resource_group_name=${{ env.BACKEND_RESOURCE_GROUP }}" \
+            -backend-config="snapshot=true"
+            -backend-config="storage_account_name=${{ env.BACKEND_STORAGE_ACCOUNT }}" \
+            -backend-config="subscription_id=${{ env.ARM_SUBSCRIPTION_ID }}" \
+            -backend-config="tenant_id=${{ env.ARM_TENANT_ID }}" \
+            -backend-config="use_oidc=true"
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
