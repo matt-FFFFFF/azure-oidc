@@ -16,7 +16,6 @@ jobs:
       ARM_SNAPSHOT: true                                    # Snapshot the state file in blob storage
       ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}  # Subscription id that we are using for both provider and backend
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}              # Tenant id that we are using for both provider and backend
-      ARM_USE_AZUREAD: true                                 # Use Azure AD for authentication to the backend (rather than try and get the access key)
       ARM_USE_OIDC: true                                    # Use OIDC for authentication for the provider and the backend
       TF_IN_AUTOMATION: 1                                   # https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform#controlling-terraform-output-in-automation
     steps:
