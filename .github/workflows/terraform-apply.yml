@@ -28,11 +28,7 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform init \
-            -backend-config="container_name=${{ vars.BACKEND_STORAGE_CONTAINER }}" \
-            -backend-config="key=${{ vars.BACKEND_KEY }}" \
-            -backend-config="resource_group_name=${{ vars.BACKEND_RESOURCE_GROUP }}" \
-            -backend-config="storage_account_name=${{ vars.BACKEND_STORAGE_ACCOUNT }}"
+          terraform init -backend-config=backend.hcl
 
       - name: Terraform Apply
         run: terraform apply -auto-approve # YOLO ;-)
