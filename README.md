@@ -1,6 +1,6 @@
 # Azure OIDC
 
-An example repo showing how to authenticate GitHub Actions to Azure using OIDC.
+An example repo showing how to authenticate GitHub Actions and Terraform to Azure using OIDC.
 
 This uses no shared secrets, and instead uses the GitHub Actions runner's identity to authenticate to Azure.
 
