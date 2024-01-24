@@ -58,7 +58,7 @@ The AzAPI provider must be configured with the following options:
 > Many `ARM_*` environment variables are shared between the AzureRM and AzAPI providers. E.g. ARM_CLIENT_ID, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID, ARM_USE_OIDC, etc.
 
 ```terraform
-provider "azurerm" {
+provider "azapi" {
   use_oidc = true
 }
 ```
